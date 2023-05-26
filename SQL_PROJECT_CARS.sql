@@ -1,0 +1,70 @@
+create schema cars;
+USE cars;
+
+-- 1) READ THE DATA
+SELECT * FROM car_dekho;
+
+-- 2)TOTAL CARS: TO GET A COUNT OF TOTAL RECORDS
+SELECT count(*) FROM car_dekho;
+
+-- 3) THE MANAGER ASKED TO THE EMPLOYEE HOW MANY CARS AVAILABLE IN 2023?
+SELECT COUNT(*) FROM car_dekho
+WHERE year=2023;
+
+-- 4) THE MANAGER ASKED TO THE EMPLOYEE HOW MANY CARS AVAILABLE IN 2020,2021,2022?
+SELECT year,COUNT(*) FROM car_dekho
+WHERE year IN (2020,2021,2022)
+GROUP BY year
+ORDER BY year;
+
+-- 5) CLIENT ASKED TO THE EMPLOYEE PRINT THE TOTAL OF CARS BY YEARS. I DONT SEE ALL THE CARS.
+SELECT year,count(*) FROM car_dekho 
+GROUP BY year;
+
+-- 6) CLIENT ASKED TO THE DEALER HOW MANY DIESEL CARS WILL THERE BE IS 2020?
+SELECT year,fuel,count(*) FROM car_dekho 
+WHERE year=2020 AND fuel="Diesel"
+GROUP BY year;
+
+
+-- 7) CLIENT ASKED TO THE DEALER HOW MANY PETROL CARS WILL THERE BE IS 2020?
+SELECT year,fuel,count(*) FROM car_dekho 
+WHERE year=2020 AND fuel="Petrol"
+GROUP BY year;
+
+-- 8) THE MANAGER TOLD TO THE EMPLOYEE TO GIVE A PRINT ALL THE FUEL CARS (PETROL,DIESEL AND CNG) COME BY ALL YEAR.
+SELECT year,count(*) FROM car_dekho 
+WHERE fuel="Petrol"
+GROUP BY year;
+
+SELECT year,count(*) FROM car_dekho 
+WHERE fuel="Diesel"
+GROUP BY year;
+
+SELECT year,count(*) FROM car_dekho 
+WHERE fuel="CNG"
+GROUP BY year;
+
+-- 9) WHICH YEAR HAD MORE THAN 100 CARS?
+SELECT year,count(*) FROM car_dekho 
+GROUP BY year
+HAVING  count(*) > 100;
+
+-- LESS THAN 100 CARS
+SELECT year,count(*) FROM car_dekho 
+GROUP BY year
+HAVING  count(*) < 100;
+
+-- 10) THE MANAGER SAID TO THE EMPLOYEE ALL CARS COUNT DETAILS BETWEEN 2015 AND 2023. 
+SELECT COUNT(*) FROM car_dekho
+WHERE year BETWEEN 2015 AND 2023;
+
+-- 11)  Maruti S-Presso LXi (YEAR = 2022) THIS CAR IS A DIESEL CAR. BUT, WRONGLY PRINTED IN THE DETAILS LIST IT IS A PETROL CAR. 
+--      SO, CHANGE THE FUEL TYPE OF CAR . CHANGE PETROL TO DIESEL.
+select name from car_dekho where km_driven = 1994;
+
+
+UPDATE car_dekho
+SET fuel = "Diesel"
+WHERE km_driven = "1994" and seats=5;
+
